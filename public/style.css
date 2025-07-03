@@ -1,11 +1,5 @@
 /* Reset default margins and apply a clean font */
-body {
-    margin: 0;
-    padding: 20px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
-}
+
 
 /* Page heading */
 h1 {
@@ -42,3 +36,55 @@ h1 {
     font-size: 1rem;
     line-height: 1.5;
 }
+/* Centered form container */
+form {
+    background-color: #fff;
+    padding: 25px 30px;
+    max-width: 500px;
+    margin: 40px auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Input fields */
+input, textarea {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: inherit;
+    box-sizing: border-box;
+}
+
+/* Improve textarea height */
+textarea {
+    height: 120px;
+    resize: vertical;
+}
+
+/* Submit button */
+button {
+    background-color: maroon;
+    color: white;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+button:hover {
+    background-color: #8b0000;
+}
+
+/* Page background & font */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f4;
+    padding: 20px;
+    color: #333;
+}
+
