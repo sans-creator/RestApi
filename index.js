@@ -3,6 +3,8 @@ const app = express();
 const path = require('path');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+const { v4: uuidv4 } = require('uuid');
+uuidv4(); // ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
 
 
 
@@ -15,17 +17,17 @@ port=8080
 
 let posts=[
     {
-    id:"1a",    
+    id:uuidv4(),    
     username:"sans",
     content:"i love coding",
 },
 {
-    id:"2a",
+    id:uuidv4(),
     username:"john",
     content:"i love javascript",
 }, 
 {
-    id:"3c",
+    id:uuidv4(),
     username:"doe",
     content:"i love python",
 
@@ -42,17 +44,21 @@ app.get('/posts/new', (req, res) => {
 
 app.post('/posts', (req, res) => {
     let { username, content } = req.body;
-    posts.push({ username, content });
+    let id=uuidv4();
+    posts.push({ id,username, content });
     res.redirect('/posts');
 });
-app.get('/posts/:id',(req,res)=>{
-    let {id}=req.params
-    let post=posts.find((p)=>id===p.id)
-    console.log(post)
+app.get('/posts/:id', (req, res) => {
+    let { id } = req.params;
+    let post = posts.find((p) => p.id === id); // Use consistent left-to-right comparison
 
+    if (!post) {
+        return res.status(404).send("Post not found");
+    }
 
-    res.render("show.ejs",{post})
-})
+    res.render("show.ejs", { post });
+});
+
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
