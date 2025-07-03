@@ -14,14 +14,18 @@ app.use(express.static(path.join(__dirname, 'public')));
 port=8080
 
 let posts=[
-    {username:"sans",
+    {
+    id:"1a",    
+    username:"sans",
     content:"i love coding",
 },
 {
+    id:"2a",
     username:"john",
     content:"i love javascript",
 }, 
 {
+    id:"3c",
     username:"doe",
     content:"i love python",
 
@@ -41,6 +45,14 @@ app.post('/posts', (req, res) => {
     posts.push({ username, content });
     res.redirect('/posts');
 });
+app.get('/posts/:id',(req,res)=>{
+    let {id}=req.params
+    let post=posts.find((p)=>id===p.id)
+    console.log(post)
+
+
+    res.render("show.ejs",{post})
+})
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
