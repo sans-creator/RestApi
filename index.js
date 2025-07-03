@@ -60,6 +60,27 @@ app.get('/posts/:id', (req, res) => {
 });
 
 
+app.patch("/posts/:id", (req, res) => {
+    //console.log("Headers:", req.headers);
+    console.log("Body:", req.body); // See what you're getting
+
+    const { id } = req.params;
+    const { content } = req.body;
+
+    if (!content) {
+        return res.status(400).send("No content received");
+    }
+
+    const post = posts.find(p => p.id === id);
+    if (!post) {
+        return res.status(404).send("Post not found");
+    }
+
+    post.content = content;
+    res.send("Post updated");
+});
+
+
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 }   );
