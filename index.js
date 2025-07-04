@@ -35,6 +35,9 @@ let posts=[
     content:"i love python",
 
 }]
+app.get("/", (req, res) => {
+    res.redirect("/posts");
+});
 
 
 app.get('/posts', (req, res) => {
