@@ -6,12 +6,15 @@ app.use(express.json());
 const { v4: uuidv4 } = require('uuid');
 uuidv4(); // ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
 
+const methodOverride = require('method-override');
+
 
 
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(methodOverride("_method"))
 
 port=8080
 
@@ -75,10 +78,23 @@ app.patch("/posts/:id", (req, res) => {
     if (!post) {
         return res.status(404).send("Post not found");
     }
-
-    post.content = content;
-    res.send("Post updated");
+    res.redirect("/posts")
+    post.content=content;
+    // res.redirect(`/posts/${id}`);
+    
 });
+
+app.get("/posts/:id/edit", (req, res) => {
+    const { id } = req.params;
+    const post = posts.find((p) => p.id === id);
+
+    if (!post) {
+        return res.status(404).send("Post not found");
+    }
+
+    res.render("edit.ejs", { post });
+});
+
 
 
 app.listen(port, () => {
